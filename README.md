@@ -15,7 +15,14 @@ each topic. It's totally fine if you don't finish all the tasks - we created
 several  extras so that you can continue your learning on your own at your own 
 pace.
 
-Ready? Let's start!
+### Intended audience
+
+This workshop assumes that you know the basics of React, and that you're pretty 
+comfortable writing your own components. If you want to brush up on your React 
+skills before attending this workshop, I suggest you look through the 
+[Beginner's guide to React](https://egghead.io/courses/the-beginner-s-guide-to-react)
+by Kent C. Dodds. Don't be put off by the title - even React pros can learn a 
+trick or two from watching this 80 minutes of video.
 
 ------
 
@@ -31,21 +38,90 @@ inject props into our children.
 
 ### Example
 
+[`React.cloneElement`](https://reactjs.org/docs/react-api.html#cloneelement) is 
+a way to, well, clone a React element. We typically use it to apply extra props
+to the children passed to our component. Here's an example of how it's used:
+
+```js
+const RadioButtonGroup = (props) => (
+  <div>
+    {React.Children.map(
+      props.children, 
+      (child) => React.cloneElement(child, { name: props.name }),
+    )}
+  </div>
+);
+```
+
+Here, we loop over all the children (`React.Children.map`), and pass the `name` 
+prop from `RadioButtonGroup` to each child. This way, we don't have to pass this 
+prop to each child manually!
+
+```js
+<RadioButtonGroup name="choice">
+  <input type="radio" value="red" />
+  <input type="radio" value="blue" />
+  <input type="radio" value="green" />
+</RadioButtonGroup>
+```
+
 ### Tasks
 
-#### Pass a property to a child
+Do as many of these as you get to before the time is out. You're not supposed to 
+finish them all as a part of the workshop.
+
+#### Pass another property to the children
+
+Continuing the `RadioButtonGroup` example from earlier - we notice that the 
+`type="radio"` prop is everywhere as well! Change the example code to pass this 
+prop directly to all children as well.
 
 [Do your work here]()
 
-#### Propagate a property to all children
+#### Make all the elements red!
+
+Just for funs, create a component that applies a red border to all its children.
+It's probably useful for debugging at some point. I guess.
+
+[Do your work here]()
+
+#### Who's going to win?
+
+What happens when you pass in children that already have a prop with the same 
+name as you're trying to overwrite? Let's find out!
+
+Create a component that applies a class of "clone-element-class" to its 
+children. Also make sure to pass in children with the "original-class" class.
+Which one wins? Can you make a component that lets you apply the 
+`clone-element-class` _and_ the `original-class` class to the children?
 
 [Do your work here]()
 
 #### Create an input group component (ID + aria-invalid)
 
+Another similar component to the `RadioButtonGroup` could be a component that 
+lets you add a label and an error message to your component. We've created the 
+outline to such a component in the sandbox below. 
+
+To make sure our component is accessible, the child needs a unique ID and an 
+aria-tag indicating whether or not it's invalid. Propagate two props - a unique
+`id` string and `aria-invalid`, which should be either `"true"` or `"false"` 
+depending on whether the `error` prop is set or not.
+
 [Do your work here]()
 
+(Tip: You _can_ use `uuid` for generating unique IDs)
+
 #### Re-create a select-box with only DIVs
+
+As we mentioned in the beginning of this section, the `<select>` and `<option>` 
+tags are great examples of how a compound component could work. Let's try to 
+recreate that!
+
+Create a `<Select />` component and an `<Option />` component that try to 
+replicate the original behavior as closely as possible. Use `React.cloneElement` 
+to provide the `<Option />` tags with `onClick` handlers and all the goodies 
+you need.
 
 [Do your work here]()
 
@@ -71,29 +147,97 @@ You've probably used HOCs before. `react-redux`' `connect` and `react-router`'s
 `withRouter` are both HOCs that wrap your component and gives it more 
 information and capabilities than it did before.
 
+### Example
+
+Here's a simple HOC that provides your component with some hard coded user info:
+
+```js
+// First, let's create some fake user info.
+const userInfo = { name: 'Kristofer', age: 30 };
+const withUserInfo = (TargetComponent) => 
+  props => <TargetComponent {...props} {...userInfo} />;
+};
+```
+
+Here, we create a function that accepts a component, and then returns a _new_ 
+component that renders the passed component with the extra `name` and `age` 
+props.
+
+You can use it like this:
+
+```js
+const Greeting = props => (
+  <p>
+    Hi {props.name}, you don't look a day over {props.age - 5}!
+  </p>
+);
+const GreetingWithUserInfoAlreadyProvided = withUserInfo(Greeting);
+```
+
 ### Tasks
 
-#### Create a simple HOC (hasProps)
+#### `withColor`
+
+Let's start off without too much frills. Create an HOC that adds the prop 
+`color="yellow"` to the passed component. 
 
 [Do your work here]()
 
 #### `withToggler`
 
+HOCs can return stateful class components as well. The sandbox below has a 
+simple outline of a Toggle component implemented. Pass two props `toggled` and 
+`onToggle` down to the wrapped component!
+
 [Do your work here]()
 
 #### `withScreenSize`
 
+Sometimes, you don't want to render something big on small devices. Therefore, 
+we need to create an HOC `withScreenSize` that provides two props `screenWidth`
+and `screenHeight` to its wrapped component. 
+
+Bonus task: Remember to update the props when the screen size changes!
+
 [Do your work here]()
+
+Tip: You get the screen size from `window.screen`.
+
+Tip: Use a debounce function like 
+[`lodash/debounce`](https://www.npmjs.com/package/lodash.debounce)
 
 #### `withConnectivity`
 
+Sometimes, you want to react to changes in connectivity. From no-fi to wi-fi to
+mobile connections - showing different UIs might be something your app requires.
+At least this workshop does.
+
+Create an HOC that provides a `connectivity` prop with the current connection 
+status.
+
 [Do your work here]()
 
+Tip: [Here's some info](https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API) 
+on how to get the connectivity status
+
 #### `withSpinner`
+
+We often fetch data. Why not create a component that renders a spinner for us 
+when we're fetching data?
+
+Create an HOC that renders a `<Spinner />` whenever the `loading`, `pending` or 
+`fetching` props are true. If they are false - just return the passed component.
 
 [Do your work here]()
 
 #### `withDebugLogging`
+
+Do you write a lot of `console.log` statements, even though there's a perfectly 
+good debugger available? We too. Create an HOC that wraps your buggy component, 
+that logs:
+
+- whenever the wrapped component renders (with timestamp)
+- whenever the props change (with the old and new props)
 
 [Do your work here]()
 
