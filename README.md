@@ -241,6 +241,18 @@ that logs:
 
 [Do your work here]()
 
+##### `withDependencyInjection`
+
+Another neat-o trick you can do with HOC is to provide them with extra props. 
+A basic HOC is a function that returns a component - but you can do better than 
+that. Create an HOC that accepts curried arguments like this:
+
+```js
+withDependencyInjection({ oneDep, anotherDep })(MyComponent);
+```
+
+[Do your work here]()
+
 ### Summary
 
 Higher order components are powerful tools that lets you do basically whatever 
@@ -273,21 +285,65 @@ Woah!
 
 ### Example
 
+The great thing about render props, is that they look a bit fancy, but they're 
+dead easy to make! Here's an example that always passes the render timestamp as 
+an argument to its child-function:
+
+```js
+const Timestamper = props => {
+  const timestamp = Date.now();
+  return (
+    <div>
+      Rendered at timestamp {timestamp}
+      <br />
+      {props.children(timestamp)}
+    </div>
+  );
+};
+```
+
+See? All it does it call `children` as a function, and pass some (optional) data 
+to it. 
+
+You use it like this:
+
+```js
+<Timestamper>
+  {timestamp => (
+    <p>{timestamp} is an {timestamp % 2 === 0 ? 'even' : 'odd'} number</p>
+  )}
+</Timestamper>
+```
+
 ### Tasks
 
 #### My first render prop
+
+Create a component that accepts a function as a `render` prop, 
+and that returns the result of calling that function in its render method.
 
 [Do your work here]()
 
 #### Function as child
 
+Using the `render` prop is fine - but how about renaming the `render` prop to 
+`children`? Refactor your code and see how you can pass your function as a 
+regular children prop.
+
 [Do your work here]()
 
 #### Re-implement the input group with render props
 
+Remember the `InputGroup` component from the `cloneElement` tasks? Re-implement 
+this component with render props! Pass the `id` and `aria-invalid` props as an 
+argument object, so the user can apply them wherever they want!
+
 [Do your work here]()
 
 #### Re-implement the toggle container with render props
+
+You can implement any HOC with render props too. Re-implement the toggle 
+container task you did in the HOC task above, with a render prop.
 
 [Do your work here]()
 
@@ -318,29 +374,103 @@ context, so you typically don't notice it at all!
 
 ### Example
 
+First, we use the new `React.createContext` API to create two new components - 
+a `Provider` and a `Consumer`. The `Provider` accepts a `value`, and the 
+`Consumer` can access this value through a render prop.
+
+Here is a simple example:
+
+```js
+const { Provider, Consumer } = React.createContext();
+
+<Provider value="42">
+  <Consumer>
+    {value => <p>The answer to life, the universe and everything is {value}</p>}
+  </Consumer>
+</Provider>
+```
+
+Basically, the value you pass to provider will show up as the argument to the 
+`Consumer` component's render prop function. This is a huge overkill here, but 
+when `<Provider />` is at the root of your app, and `<Consumer />` is seven 
+layers of components further down - this is of great use!
+
 #### Tasks
 
-##### Creating context
+##### Creating a theme context
+
+Let's get you started with your very own context! Create a new file, create a 
+provider and consumer, and export them as `ThemeProvider` and `ThemeConsumer`.
 
 [Do your work here]()
 
 ##### Providing context
 
+To use a provider, it usually makes sense to keep the data you want to provide 
+in component state. Create a component that keeps your theme name in state 
+(let's default it to 'light'), and pass that value into the `Provider`'s `value` 
+prop. This is what you now should export from the `ThemeProvider` export from 
+the previous task.
+
+Make sure your component also renders `props.children`, so that you can wrap 
+your app in it!
+
 [Do your work here]()
 
 ##### Consuming context
 
+So you've created a theme provider component, and now you want access to this 
+theme? Great, let's start consuming it!
+
+In the sandbox below, we've created an app with a provider and a few components
+between it and where you want your context. Import and use your consumer 
+component directly!
+
 [Do your work here]()
 
-##### Theme
+##### Consume context with an HOC
+
+Often, it's easier to consume context with an HOC. Create an HOC that uses your 
+`<Consumer />` component to provide your theme as a prop to your wrapped
+component, instead of as a render prop argument.
+
+[Do your work here]()
+
+##### Updating the theme
+
+A single theme doesn't make much sense. To alleave this, we're going to pass a 
+callback down alongside our `theme` context prop. We do this by passing an 
+object down as the provided `value` prop, with two keys: `theme` and 
+`changeTheme`.
+
+Rebase your code to pass an object as context, and add a `changeTheme` callback
+that updates your theme. Remember - that value is in your provider's state, so 
+you're probably going to want something that calls `this.setState` somewhere!
 
 [Do your work here]()
 
 ##### Internationalization
 
+Our startup is blowing up in Germany! We need internationalization support right
+away!
+
+We hired a real German to translate our texts, so you'll find them in the 
+provided sandbox. Your job is to provide these texts through context!
+
+Bonus task: Add support for changing the language!
+
 [Do your work here]()
 
 ##### "Redux"
+
+Redux is a state management tool that's pretty popular with the kids these days. 
+A lot of people use it just to share state across the application. We can do 
+that with React's context API!
+
+Create a provider `AppStateProvider` and consumer HOC `connect` that lets the 
+app have a single top level state tree. The `connect` HOC needs to support a way 
+to update the state, and a way to select the relevant part of the state (like 
+`mapStateToProps` does today).
 
 [Do your work here]()
 
