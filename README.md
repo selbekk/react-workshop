@@ -1,5 +1,8 @@
 # Advanced React Patterns tutorial
 
+> 🚨🚨🚨 This is still WIP! 🚨🚨🚨
+> Not really ready for prime time yet.
+
 This is the tasks and assignments for the Advanced React Patterns tutorial, held
 by @selbekk et al.
 
