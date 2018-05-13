@@ -166,15 +166,15 @@ const GreetingWithUserInfoAlreadyProvided = withUserInfo(Greeting);
 Let's start off without too much frills. Create an HOC that adds the prop 
 `color="yellow"` to the passed component. 
 
-[Do your work here]()
+[Do your work here](https://codesandbox.io/s/y3m62kw2wx)
 
 #### `withToggler`
 
 HOCs can return stateful class components as well. The sandbox below has a 
-simple outline of a Toggle component implemented. Pass two props `toggled` and 
-`onToggle` down to the wrapped component!
+simple outline of a WithToggler component implemented. Pass two props `toggled` 
+and `onToggle` down to the wrapped component!
 
-[Do your work here]()
+[Do your work here](https://codesandbox.io/s/vmomkwlpnl)
 
 #### `withScreenSize`
 
@@ -184,36 +184,13 @@ and `screenHeight` to its wrapped component.
 
 Bonus task: Remember to update the props when the screen size changes!
 
-[Do your work here]()
+[Do your work here](https://codesandbox.io/s/o4x27lpj99)
 
 Tip: You get the screen size from `window.screen`.
 
 Tip: Use a debounce function like 
-[`lodash/debounce`](https://www.npmjs.com/package/lodash.debounce)
-
-#### `withConnectivity`
-
-Sometimes, you want to react to changes in connectivity. From no-fi to wi-fi to
-mobile connections - showing different UIs might be something your app requires.
-At least this workshop does.
-
-Create an HOC that provides a `connectivity` prop with the current connection 
-status.
-
-[Do your work here]()
-
-Tip: [Here's some info](https://developer.mozilla.org/en-US/docs/Web/API/Network_Information_API) 
-on how to get the connectivity status
-
-#### `withSpinner`
-
-We often fetch data. Why not create a component that renders a spinner for us 
-when we're fetching data?
-
-Create an HOC that renders a `<Spinner />` whenever the `loading`, `pending` or 
-`fetching` props are true. If they are false - just return the passed component.
-
-[Do your work here]()
+[`lodash/debounce`](https://www.npmjs.com/package/lodash.debounce) to only get
+the screen size when it's required.
 
 #### `withDebugLogging`
 
@@ -224,7 +201,7 @@ that logs:
 - whenever the wrapped component renders (with timestamp)
 - whenever the props change (with the old and new props)
 
-[Do your work here]()
+[Do your work here](https://7o3znxq28j.codesandbox.io/)
 
 ##### `withDependencyInjection`
 
@@ -236,7 +213,25 @@ that. Create an HOC that accepts curried arguments like this:
 withDependencyInjection({ oneDep, anotherDep })(MyComponent);
 ```
 
-[Do your work here]()
+Or, in plain English, a function that returns a function that returns a function
+that renders a component you passed in. :mind_blown: Who said functional 
+programming wasn't fun?
+
+It's not all too bad though. It's basically changing this:
+
+```js
+TargetComponent => props => <TargetComponent {...} />
+```
+
+to this:
+
+```js
+someExtraArguments => TargetComponent => props => <TargetComponent {...} />
+```
+
+The sandbox below has an outline ready for you to try out!
+
+[Do your work here](https://codesandbox.io/s/8kzpooxm60)
 
 ### Summary
 
