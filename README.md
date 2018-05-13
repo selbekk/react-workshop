@@ -249,7 +249,17 @@ lets you harness the powers of HOCs, while at the same time retain the freedom
 you apply that power wherever you want.
 
 "Render props" is the act of returning the result of calling a prop in your 
-component's `render` method. That prop could be called whatever you want - even 
+component's `render` method. 
+
+```js
+<MyRenderPropComponent
+  render={magicProps => (
+    <div>{magicProps.someData}</div>
+  )}
+/>
+```
+
+That render prop could be called whatever you want - even 
 `children`. Since the `children` prop is handled a bit differently in JSX than 
 the rest, this lets you pass in a function as children to your component:
 
@@ -266,19 +276,13 @@ Woah!
 ### Example
 
 The great thing about render props, is that they look a bit fancy, but they're 
-dead easy to make! Here's an example that always passes the render timestamp as 
-an argument to its child-function:
+dead easy to create! Here's an example that always passes the render timestamp 
+as an argument to its child-function:
 
 ```js
 const Timestamper = props => {
   const timestamp = Date.now();
-  return (
-    <div>
-      Rendered at timestamp {timestamp}
-      <br />
-      {props.children(timestamp)}
-    </div>
-  );
+  return props.children(timestamp);
 };
 ```
 
@@ -302,7 +306,7 @@ You use it like this:
 Create a component that accepts a function as a `render` prop, 
 and that returns the result of calling that function in its render method.
 
-[Do your work here]()
+[Do your work here](https://codesandbox.io/s/zkmvo501m3)
 
 #### Function as child
 
@@ -310,7 +314,7 @@ Using the `render` prop is fine - but how about renaming the `render` prop to
 `children`? Refactor your code and see how you can pass your function as a 
 regular children prop.
 
-[Do your work here]()
+[Do your work here](https://codesandbox.io/s/p5rl78v2r7)
 
 #### Re-implement the input group with render props
 
@@ -318,14 +322,14 @@ Remember the `InputGroup` component from the `cloneElement` tasks? Re-implement
 this component with render props! Pass the `id` and `aria-invalid` props as an 
 argument object, so the user can apply them wherever they want!
 
-[Do your work here]()
+[Do your work here](https://codesandbox.io/s/xrn96k4zqz)
 
 #### Re-implement the toggle container with render props
 
 You can implement any HOC with render props too. Re-implement the toggle 
 container task you did in the HOC task above, with a render prop.
 
-[Do your work here]()
+[Do your work here](https://codesandbox.io/s/9z809oj14w)
 
 ### Summary
 
