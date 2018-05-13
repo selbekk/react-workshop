@@ -368,38 +368,42 @@ Here is a simple example:
 const { Provider, Consumer } = React.createContext();
 
 <Provider value="42">
-  <Consumer>
-    {value => <p>The answer to life, the universe and everything is {value}</p>}
-  </Consumer>
+  <LotsOfOtherComponents>
+    <Consumer>
+      {value => (
+        <p>The answer to life, the universe and everything is {value}</p>
+      )}
+    </Consumer>
+  </LotsOfOtherComponents>
 </Provider>
 ```
 
 Basically, the value you pass to provider will show up as the argument to the 
-`Consumer` component's render prop function. This is a huge overkill here, but 
-when `<Provider />` is at the root of your app, and `<Consumer />` is seven 
-layers of components further down - this is of great use!
+`Consumer` component's render prop function. This might look like a bit "much" 
+here, but when `<Provider />` is at the root of your app, and `<Consumer />` is 
+seven layers of components further down - this saves you a lot of time!
 
 #### Tasks
 
 ##### Creating a theme context
 
-Let's get you started with your very own context! Create a new file, create a 
-provider and consumer, and export them as `ThemeProvider` and `ThemeConsumer`.
+Let's get you started with your very own context! Create a 
+context with React's `createContext` function, and destructure out its two 
+`Provider` and `Consumer` members.
 
-[Do your work here]()
+[Do your work here](https://codesandbox.io/s/48o3zjmrj9)
 
-##### Providing context
+##### (cont) Providing context
 
 To use a provider, it usually makes sense to keep the data you want to provide 
 in component state. Create a component that keeps your theme name in state 
-(let's default it to 'light'), and pass that value into the `Provider`'s `value` 
-prop. This is what you now should export from the `ThemeProvider` export from 
-the previous task.
+(let's default it to 'light'), and pass that value into the `Provider`'s `value`
+prop.
 
 Make sure your component also renders `props.children`, so that you can wrap 
 your app in it!
 
-[Do your work here]()
+[Do your work here](https://codesandbox.io/s/l97wpnx42z)
 
 ##### Consuming context
 
@@ -410,15 +414,7 @@ In the sandbox below, we've created an app with a provider and a few components
 between it and where you want your context. Import and use your consumer 
 component directly!
 
-[Do your work here]()
-
-##### Consume context with an HOC
-
-Often, it's easier to consume context with an HOC. Create an HOC that uses your 
-`<Consumer />` component to provide your theme as a prop to your wrapped
-component, instead of as a render prop argument.
-
-[Do your work here]()
+[Do your work here](https://codesandbox.io/s/m5lkmxpj6p)
 
 ##### Updating the theme
 
