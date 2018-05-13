@@ -70,23 +70,20 @@ prop to each child manually!
 
 ### Tasks
 
-Do as many of these as you get to before the time is out. You're not supposed to 
-finish them all as a part of the workshop.
+#### Pass a property to the children
 
-#### Pass another property to the children
+Create a component that passes a property "name" with your own name to its 
+children.
 
-Continuing the `RadioButtonGroup` example from earlier - we notice that the 
-`type="radio"` prop is everywhere as well! Change the example code to pass this 
-prop directly to all children as well.
-
-[Do your work here]()
+[Do your work here](https://codesandbox.io/s/pj1n817mkj)
 
 #### Make all the elements red!
 
-Just for funs, create a component that applies a red border to all its children.
-It's probably useful for debugging at some point. I guess.
+We've all solved CSS problems by applying a red border to elements, one by one, 
+until we've found the one that's acting up. Just for funs, create a component 
+that applies a red border to all its children.
 
-[Do your work here]()
+[Do your work here](https://codesandbox.io/s/92wj5yvny)
 
 #### Who's going to win?
 
@@ -98,7 +95,7 @@ children. Also make sure to pass in children with the "original-class" class.
 Which one wins? Can you make a component that lets you apply the 
 `clone-element-class` _and_ the `original-class` class to the children?
 
-[Do your work here]()
+[Do your work here](https://codesandbox.io/s/186xp98847)
 
 #### Create an input group component (ID + aria-invalid)
 
@@ -111,22 +108,7 @@ aria-tag indicating whether or not it's invalid. Propagate two props - a unique
 `id` string and `aria-invalid`, which should be either `"true"` or `"false"` 
 depending on whether the `error` prop is set or not.
 
-[Do your work here]()
-
-(Tip: You _can_ use `uuid` for generating unique IDs)
-
-#### Re-create a select-box with only DIVs
-
-As we mentioned in the beginning of this section, the `<select>` and `<option>` 
-tags are great examples of how a compound component could work. Let's try to 
-recreate that!
-
-Create a `<Select />` component and an `<Option />` component that try to 
-replicate the original behavior as closely as possible. Use `React.cloneElement` 
-to provide the `<Option />` tags with `onClick` handlers and all the goodies 
-you need.
-
-[Do your work here]()
+[Do your work here](https://codesandbox.io/s/3q82r69qp)
 
 ### Summary
 
@@ -494,6 +476,7 @@ If you found these topics interesting, and want to learn more, there are some
 resources you can look into to further continue your learning.
 
 - [Kent C. Dodds' course on advanced React](https://blog.kentcdodds.com/advanced-react-component-patterns-56af2b74bc5f)
+- [Max Stoiber's deep dive on children in React](https://mxstbr.blog/2017/02/react-children-deepdive/)
 - article on HOCs (the one I used for inspiration for tasks)
 - article on render props
 - the React docs
