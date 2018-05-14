@@ -1,13 +1,9 @@
 # Advanced React Patterns tutorial
 
-> 🚨🚨🚨 This is still WIP! 🚨🚨🚨
-> Not really ready for prime time yet.
-
 This is the tasks and assignments for the Advanced React Patterns tutorial, held
 by @selbekk et al.
 
-You can find the slides associated to this workshop somewhere online once I've
-made them.
+You can find the slides associated to this workshop [here](https://slides.com/kristoferselbekk/advanced-react-patterns).
 
 ## About this workshop
 
