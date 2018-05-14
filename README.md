@@ -427,7 +427,7 @@ Rebase your code to pass an object as context, and add a `changeTheme` callback
 that updates your theme. Remember - that value is in your provider's state, so 
 you're probably going to want something that calls `this.setState` somewhere!
 
-[Do your work here]()
+[Do your work here](https://codesandbox.io/s/zw7j37x42p)
 
 ##### Internationalization
 
@@ -437,22 +437,9 @@ away!
 We hired a real German to translate our texts, so you'll find them in the 
 provided sandbox. Your job is to provide these texts through context!
 
-Bonus task: Add support for changing the language!
+If you have the time, also add support for changing the language!
 
-[Do your work here]()
-
-##### "Redux"
-
-Redux is a state management tool that's pretty popular with the kids these days. 
-A lot of people use it just to share state across the application. We can do 
-that with React's context API!
-
-Create a provider `AppStateProvider` and consumer HOC `connect` that lets the 
-app have a single top level state tree. The `connect` HOC needs to support a way 
-to update the state, and a way to select the relevant part of the state (like 
-`mapStateToProps` does today).
-
-[Do your work here]()
+[Do your work here](https://codesandbox.io/s/1o20nr4vr7)
 
 ### Summary
 
@@ -472,11 +459,8 @@ resources you can look into to further continue your learning.
 
 - [Kent C. Dodds' course on advanced React](https://blog.kentcdodds.com/advanced-react-component-patterns-56af2b74bc5f)
 - [Max Stoiber's deep dive on children in React](https://mxstbr.blog/2017/02/react-children-deepdive/)
-- article on HOCs (the one I used for inspiration for tasks)
-- article on render props
-- the React docs
-- article on context
-- article on compound components
+- [The React docs on HOCs](https://reactjs.org/docs/higher-order-components.html)
+- [The React docs on render props](https://reactjs.org/docs/render-props.html)
 
 ## Feedback!
 
