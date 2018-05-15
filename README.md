@@ -21,24 +21,23 @@ comfortable writing your own components. If you want to brush up on your React
 skills before attending this workshop, I suggest you look through the 
 [Beginner's guide to React](https://egghead.io/courses/the-beginner-s-guide-to-react)
 by Kent C. Dodds. Don't be put off by the title - even React pros can learn a 
-trick or two from watching this 80 minutes of video.
+trick or two from watching these 80 minutes of video.
 
 ------
 
-## Compound components
+## Implicit props
 
-Compound components are several components that work together to create a united
-experience. A great example from the HTML world is `<select>` and `<option>` 
-tags - one without the other doesn't do much, but together, they rule the world 
-(or, well, let's you pick a value from a list of values). 
+Implicit props are props that are applied to your component without you 
+explicitly adding them! They appear out of thin air, and may seem a bit weird. 
+In real life, though, they are really useful in certain scenarios.
 
 We're going to start this workshop off by using React's `cloneElement` API to 
-inject props into our children.
+inject these implicit props into the children of our components.
 
 ### Example
 
 [`React.cloneElement`](https://reactjs.org/docs/react-api.html#cloneelement) is 
-a way to, well, clone a React element. We typically use it to apply extra props
+a way to clone a React element. We typically use it to apply extra props
 to the children passed to our component. Here's an example of how it's used:
 
 ```js
@@ -63,6 +62,8 @@ prop to each child manually!
   <input type="radio" value="green" />
 </RadioButtonGroup>
 ```
+
+This saves us from a bit of repetition!
 
 ### Tasks
 
@@ -197,9 +198,9 @@ that logs:
 - whenever the wrapped component renders (with timestamp)
 - whenever the props change (with the old and new props)
 
-[Do your work here](https://7o3znxq28j.codesandbox.io/)
+[Do your work here](https://codesandbox.io/s/7o3znxq28j)
 
-##### `withDependencyInjection`
+##### Bonus task! `withDependencyInjection`
 
 Another neat-o trick you can do with HOC is to provide them with extra props. 
 A basic HOC is a function that returns a component - but you can do better than 
@@ -425,7 +426,7 @@ you're probably going to want something that calls `this.setState` somewhere!
 
 [Do your work here](https://codesandbox.io/s/zw7j37x42p)
 
-##### Internationalization
+##### Bonus task: Internationalization
 
 Our startup is blowing up in Germany! We need internationalization support right
 away!
@@ -455,16 +456,11 @@ resources you can look into to further continue your learning.
 
 - [Kent C. Dodds' course on advanced React](https://blog.kentcdodds.com/advanced-react-component-patterns-56af2b74bc5f)
 - [Max Stoiber's deep dive on children in React](https://mxstbr.blog/2017/02/react-children-deepdive/)
+- [The React docs on React.cloneElement()](https://reactjs.org/docs/react-api.html#cloneelement)
 - [The React docs on HOCs](https://reactjs.org/docs/higher-order-components.html)
 - [The React docs on render props](https://reactjs.org/docs/render-props.html)
+- [The React docs on context](https://reactjs.org/docs/context.html)
 
-## Feedback!
+## Thanks!
 
-The only way we get better is through feedback. Please provide us with some 
-insights on how this workshop was perceived, what it excelled at, and where we
-can improve.
-
-[Feedback form is here]()
-
-If you feel up for adding more tasks, fixing our spelling or whatever, please
-let us know!
+Thanks for spending your time working through these tasks!
