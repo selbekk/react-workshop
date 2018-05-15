@@ -149,7 +149,7 @@ You can use it like this:
 ```js
 const Greeting = props => (
   <p>
-    Hi {props.name}, you don't look a day over {props.age - 5}!
+    Hi {props.name}, you do not look a day over {props.age - 5}!
   </p>
 );
 const GreetingWithUserInfoAlreadyProvided = withUserInfo(Greeting);
